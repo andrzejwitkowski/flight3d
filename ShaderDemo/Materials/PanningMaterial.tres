@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://blql1hpkhujn1"]
+
+[ext_resource type="Shader" uid="uid://cmo3qjm6m5dbi" path="res://ShaderDemo/Shders/PanningShader.tres" id="1_44sfo"]
+[ext_resource type="Texture2D" uid="uid://bupx43wp07bwt" path="res://ShaderDemo/Assets/CustomUVChecker_byValle_1K.png" id="2_o0evd"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_44sfo")
+shader_parameter/speed = Vector2(0.2, 0.2)
+shader_parameter/Image = ExtResource("2_o0evd")

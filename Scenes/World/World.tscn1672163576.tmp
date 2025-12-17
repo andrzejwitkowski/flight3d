@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://frnk4p3unksr"]
+[gd_scene load_steps=11 format=3 uid="uid://frnk4p3unksr"]
 
 [ext_resource type="Script" uid="uid://c2i8w8h1oaq1b" path="res://Scenes/World/World.gd" id="1_87yka"]
 [ext_resource type="Texture2D" uid="uid://bx1hrtr7l3g5p" path="res://Assets/Images/HDR_galactic_plane_hazy_nebulae.hdr" id="1_xf6vi"]
 [ext_resource type="AudioStream" uid="uid://bkfgq024vhv3d" path="res://Assets/Audio/tense-suspense-background-music-375570.mp3" id="5_hveh7"]
 [ext_resource type="AudioStream" uid="uid://bvk67n8u20soc" path="res://Assets/Audio/tense-suspense-background-music-376385.mp3" id="6_87yka"]
-[ext_resource type="PackedScene" uid="uid://gtsnv33a1cye" path="res://Scenes/Player/Player.tscn" id="7_87yka"]
 [ext_resource type="PackedScene" uid="uid://b5s5dito4uyp1" path="res://Scenes/Spawner/Spawner.tscn" id="8_kjd5s"]
 [ext_resource type="PackedScene" uid="uid://2gv3qb8l4xt0" path="res://Scenes/GameUi/GameUi.tscn" id="11_0d0er"]
 
@@ -45,12 +44,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -200)
 [node name="GameUi" parent="." instance=ExtResource("11_0d0er")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.894248, 0.44757178, 0, -0.44757178, 0.894248, 0.066599846, 10.502844, 10.6062565)
 
 [node name="TestTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
-
-[node name="Player" parent="." instance=ExtResource("7_87yka")]
 
 [connection signal="timeout" from="TestTimer" to="." method="_on_test_timer_timeout"]

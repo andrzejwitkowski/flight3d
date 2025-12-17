@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://xhr55wwf4c5w"]
+
+[ext_resource type="Material" uid="uid://blql1hpkhujn1" path="res://ShaderDemo/Materials/PanningMaterial.tres" id="1_70mr7"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_smt41"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_70mr7"]
+
+[node name="ShaderDemo" type="Node"]
+
+[node name="Panning" type="Node3D" parent="."]
+
+[node name="Quad" type="MeshInstance3D" parent="Panning"]
+material_override = ExtResource("1_70mr7")
+mesh = SubResource("QuadMesh_smt41")
+
+[node name="Box" type="MeshInstance3D" parent="Panning"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.136303, 0, 0)
+material_override = ExtResource("1_70mr7")
+mesh = SubResource("BoxMesh_70mr7")
