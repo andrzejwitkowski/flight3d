@@ -5,6 +5,8 @@ class_name Player
 
 @onready var pivot: Node3D = $Pivot
 
+@onready var gun: Gun = $Pivot/Gun
+
 const GROUP_PLAYER: String = "player"
 
 @export var fly_speed: float = 30.0
@@ -25,6 +27,11 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	update_ship_rotation(roll_input, pitch_input, delta)
+	
+	
+func _unhandled_input(event: InputEvent) -> void:	
+	if event.is_action_pressed("shoot"):
+		gun.shoot()
 	
 func update_ship_rotation(roll_input: float, pitch_input: float, delta: float) -> void:
 	var target_roll = -roll_input * max_roll_angle

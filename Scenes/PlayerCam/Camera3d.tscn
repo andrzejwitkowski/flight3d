@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnadhe3vdh8gj"]
+
+[ext_resource type="Script" uid="uid://cmnwx73rvtoet" path="res://Scenes/PlayerCam/Camera3d.gd" id="1_kkabn"]
+[ext_resource type="PackedScene" uid="uid://dbx4srq242e5i" path="res://Scenes/PlayerRef/PlayerRef.tscn" id="2_ot2c3"]
+
+[node name="Camera3D" type="Camera3D"]
+script = ExtResource("1_kkabn")
+
+[node name="PlayerRef" parent="." instance=ExtResource("2_ot2c3")]

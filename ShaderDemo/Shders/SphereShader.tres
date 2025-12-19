@@ -1,0 +1,95 @@
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://fxbrerp7201n"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_jvci6"]
+parameter_name = "Base"
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_ifbcm"]
+parameter_name = "Highlight"
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_76ogk"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(1, 1, 1, 1), 2, Quaternion(0.5, 0.5, 0.5, 0.5)]
+op_type = 5
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_8fm4o"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_if04x"]
+parameter_name = "Noise"
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_005ur"]
+parameter_name = "Esge0"
+hint = 1
+
+[sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_jvci6"]
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_ifbcm"]
+parameter_name = "Esge1"
+hint = 1
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform vec4 Base : source_color;
+uniform vec4 Highlight : source_color;
+uniform float Esge0 : hint_range(0.0, 1.0);
+uniform float Esge1 : hint_range(0.0, 1.0);
+uniform sampler2D Noise;
+
+
+
+void fragment() {
+// ColorParameter:2
+	vec4 n_out2p0 = Base;
+
+
+// ColorParameter:3
+	vec4 n_out3p0 = Highlight;
+
+
+// FloatParameter:7
+	float n_out7p0 = Esge0;
+
+
+// FloatParameter:9
+	float n_out9p0 = Esge1;
+
+
+	vec4 n_out5p0;
+// Texture2D:5
+	n_out5p0 = texture(Noise, UV);
+	float n_out5p2 = n_out5p0.g;
+
+
+// SmoothStep:8
+	float n_out8p0 = smoothstep(n_out7p0, n_out9p0, n_out5p2);
+
+
+// Mix:4
+	vec4 n_out4p0 = mix(n_out2p0, n_out3p0, vec4(n_out8p0));
+
+
+// Output:0
+	ALBEDO = vec3(n_out4p0.xyz);
+
+
+}
+"
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_jvci6")
+nodes/fragment/2/position = Vector2(-460, 100)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorParameter_ifbcm")
+nodes/fragment/3/position = Vector2(-460, 340)
+nodes/fragment/4/node = SubResource("VisualShaderNodeMix_76ogk")
+nodes/fragment/4/position = Vector2(140, 340)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_8fm4o")
+nodes/fragment/5/position = Vector2(-200, 1100)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTexture2DParameter_if04x")
+nodes/fragment/6/position = Vector2(-660, 1080)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatParameter_005ur")
+nodes/fragment/7/position = Vector2(-460, 560)
+nodes/fragment/8/node = SubResource("VisualShaderNodeSmoothStep_jvci6")
+nodes/fragment/8/position = Vector2(100, 780)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatParameter_ifbcm")
+nodes/fragment/9/position = Vector2(-460, 840)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 1, 2, 0, 4, 0, 6, 0, 5, 2, 4, 0, 0, 0, 7, 0, 8, 0, 9, 0, 8, 1, 5, 2, 8, 2, 8, 0, 4, 2)

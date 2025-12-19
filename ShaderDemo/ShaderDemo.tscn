@@ -1,14 +1,96 @@
-[gd_scene load_steps=4 format=3 uid="uid://xhr55wwf4c5w"]
+[gd_scene load_steps=27 format=3 uid="uid://xhr55wwf4c5w"]
 
 [ext_resource type="Material" uid="uid://blql1hpkhujn1" path="res://ShaderDemo/Materials/PanningMaterial.tres" id="1_70mr7"]
+[ext_resource type="Shader" uid="uid://dyuter7seg6a3" path="res://ShaderDemo/Shders/IconShader.tres" id="2_sl10n"]
+[ext_resource type="Shader" uid="uid://b3xtvncbexgro" path="res://ShaderDemo/Shders/GrassShader.tres" id="3_2diny"]
+[ext_resource type="Shader" uid="uid://fxbrerp7201n" path="res://ShaderDemo/Shders/SphereShader.tres" id="4_md5th"]
+[ext_resource type="Shader" uid="uid://b80jhkmdyjsw" path="res://ShaderDemo/Shders/FresnelShader.tres" id="5_ctqhl"]
+[ext_resource type="Shader" uid="uid://fouss5m4bt3n" path="res://ShaderDemo/Shders/VertexDispShader.tres" id="6_qt33a"]
+[ext_resource type="Shader" uid="uid://rpqny8bs2kyw" path="res://ShaderDemo/Shders/FlagShader.tres" id="7_2pipx"]
+[ext_resource type="Shader" uid="uid://bv4lp2jyxsumn" path="res://ShaderDemo/Shders/ShpereDisp.tres" id="8_3j2xx"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_smt41"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_70mr7"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2diny"]
+render_priority = 0
+shader = ExtResource("2_sl10n")
+shader_parameter/Dissolve = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_md5th"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_md5th"]
+render_priority = 0
+shader = ExtResource("3_2diny")
+shader_parameter/Mix2 = 0.6610000313975
+
+[sub_resource type="QuadMesh" id="QuadMesh_ctqhl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_md5th"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ctqhl"]
+noise = SubResource("FastNoiseLite_md5th")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctqhl"]
+render_priority = 0
+shader = ExtResource("4_md5th")
+shader_parameter/Base = Color(0, 0, 0, 1)
+shader_parameter/Highlight = Color(0.19180578, 0.4182758, 0.88541245, 1)
+shader_parameter/Esge0 = 0.6790000322525
+shader_parameter/Esge1 = 0.3450000163875
+shader_parameter/Noise = SubResource("NoiseTexture2D_ctqhl")
+
+[sub_resource type="SphereMesh" id="SphereMesh_qt33a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qt33a"]
+render_priority = 0
+shader = ExtResource("5_ctqhl")
+shader_parameter/Base = Color(0.05935262, 0.04168891, 0.00070413185, 1)
+shader_parameter/Rim = Color(6.277, 4.306141, 0.955681, 1)
+shader_parameter/Power = 10.34400049134
+shader_parameter/edge0 = 0.3650000173375
+shader_parameter/edge1 = 0.678000032205
+shader_parameter/speed = 0.3790000180025
+
+[sub_resource type="SphereMesh" id="SphereMesh_2pipx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2pipx"]
+render_priority = 0
+shader = ExtResource("6_qt33a")
+shader_parameter/FloatParameter = 0.1150000054625
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3j2xx"]
+size = Vector2(4, 4)
+subdivide_width = 32
+subdivide_depth = 32
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3j2xx"]
+render_priority = 0
+shader = ExtResource("7_2pipx")
+shader_parameter/Speed = 5.9770002839075005
+shader_parameter/Freq = 9.6550004586125
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qt33a"]
+size = Vector2(3, 1)
+subdivide_width = 36
+subdivide_depth = 12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_thfkf"]
+render_priority = 0
+shader = ExtResource("8_3j2xx")
+shader_parameter/Strength = 0.650000030875
+shader_parameter/Speed = 0.0800000038
+
+[sub_resource type="SphereMesh" id="SphereMesh_y85jy"]
+radius = 5.0
+height = 10.0
+
 [node name="ShaderDemo" type="Node"]
 
 [node name="Panning" type="Node3D" parent="."]
+visible = false
 
 [node name="Quad" type="MeshInstance3D" parent="Panning"]
 material_override = ExtResource("1_70mr7")
@@ -18,3 +100,47 @@ mesh = SubResource("QuadMesh_smt41")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.136303, 0, 0)
 material_override = ExtResource("1_70mr7")
 mesh = SubResource("BoxMesh_70mr7")
+
+[node name="Masking" type="Node3D" parent="."]
+visible = false
+
+[node name="Icon" type="MeshInstance3D" parent="Masking"]
+visible = false
+material_override = SubResource("ShaderMaterial_2diny")
+mesh = SubResource("QuadMesh_md5th")
+
+[node name="Grass" type="MeshInstance3D" parent="Masking"]
+visible = false
+material_override = SubResource("ShaderMaterial_md5th")
+mesh = SubResource("QuadMesh_ctqhl")
+
+[node name="Sphere" type="MeshInstance3D" parent="Masking"]
+visible = false
+material_override = SubResource("ShaderMaterial_ctqhl")
+mesh = SubResource("SphereMesh_qt33a")
+
+[node name="Node3D" type="Node3D" parent="."]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+material_override = SubResource("ShaderMaterial_qt33a")
+mesh = SubResource("SphereMesh_2pipx")
+
+[node name="Vertex" type="Node3D" parent="."]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Vertex"]
+visible = false
+material_override = SubResource("ShaderMaterial_2pipx")
+mesh = SubResource("PlaneMesh_3j2xx")
+
+[node name="Flag" type="MeshInstance3D" parent="Vertex"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.6982064, 0)
+visible = false
+material_override = SubResource("ShaderMaterial_3j2xx")
+mesh = SubResource("PlaneMesh_qt33a")
+
+[node name="Speher" type="MeshInstance3D" parent="Vertex"]
+visible = false
+material_override = SubResource("ShaderMaterial_thfkf")
+mesh = SubResource("SphereMesh_y85jy")

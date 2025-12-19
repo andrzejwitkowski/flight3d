@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddm7duwsc0shq"]
+
+[ext_resource type="Script" uid="uid://bud1qyese8s2m" path="res://Scenes/Vfx/ShadedWall.gd" id="1_dnto5"]
+[ext_resource type="Shader" uid="uid://dno2uaiaw82ly" path="res://Scenes/Vfx/ShadedWallShader.tres" id="1_eekpc"]
+[ext_resource type="PackedScene" uid="uid://dbx4srq242e5i" path="res://Scenes/PlayerRef/PlayerRef.tscn" id="2_n8m0a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n8m0a"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_eekpc")
+shader_parameter/WallColor = Color(0.75196254, 0.16667551, 0.99589926, 1)
+shader_parameter/Strength = 0.902000042845
+shader_parameter/Speed = 0.4450000211375
+
+[sub_resource type="QuadMesh" id="QuadMesh_dnto5"]
+size = Vector2(20, 16)
+
+[node name="ShadedWall" type="Node3D"]
+script = ExtResource("1_dnto5")
+
+[node name="WallMesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_n8m0a")
+mesh = SubResource("QuadMesh_dnto5")
+
+[node name="PlayerRef" parent="." instance=ExtResource("2_n8m0a")]
