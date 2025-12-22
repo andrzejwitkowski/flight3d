@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="LossOfControl" load_steps=2 format=3 uid="uid://scrtxhjln140"]
+
+[ext_resource type="Script" uid="uid://ck7nlh2dg7po3" path="res://Scenes/TieFighter/Behaviours/LossOfControl.gd" id="1_q6tht"]
+
+[resource]
+script = ExtResource("1_q6tht")
+metadata/_custom_type_script = "uid://ck7nlh2dg7po3"

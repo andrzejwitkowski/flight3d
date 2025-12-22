@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://kc80hmvirnld"]
+
+[ext_resource type="Script" uid="uid://c5o3hix7tmp52" path="res://Scenes/EnemyExplode/EnemyExplode.gd" id="1_7cf4b"]
+
+[node name="EnemyExplode" type="Node3D"]
+script = ExtResource("1_7cf4b")

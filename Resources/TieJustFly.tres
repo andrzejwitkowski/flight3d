@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="EnemyBehaviour" load_steps=2 format=3 uid="uid://yuuvcoy7lbhb"]
+
+[ext_resource type="Script" uid="uid://tty75pmsy3hj" path="res://Scenes/TieFighter/Behaviours/EnemyBehaviour.gd" id="1_dt80s"]
+
+[resource]
+script = ExtResource("1_dt80s")
+metadata/_custom_type_script = "uid://tty75pmsy3hj"
