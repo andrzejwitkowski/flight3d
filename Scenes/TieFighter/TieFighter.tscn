@@ -1,7 +1,9 @@
-[gd_scene load_steps=15 format=4 uid="uid://cqfsxebotraic"]
+[gd_scene load_steps=21 format=4 uid="uid://cqfsxebotraic"]
 
 [ext_resource type="Texture2D" uid="uid://ii21bfavvae3" path="res://Assets/Models/TieFighter/TieFighter_Image_0.png" id="1_fj06c"]
+[ext_resource type="Script" uid="uid://c6rbiurw708en" path="res://Scenes/TieFighter/TieFighter.gd" id="1_jo6g7"]
 [ext_resource type="Texture2D" uid="uid://c3fwtxi8ugdc5" path="res://Assets/Models/TieFighter/TieFighter_Image_1.png" id="2_nlirc"]
+[ext_resource type="Resource" uid="uid://scrtxhjln140" path="res://Resources/LossOfControl.tres" id="2_ukorm"]
 [ext_resource type="Texture2D" uid="uid://brpemkclpna4l" path="res://Assets/Models/TieFighter/TieFighter_Image_2.jpg" id="3_78yh6"]
 [ext_resource type="Texture2D" uid="uid://bsel4tk0llwpc" path="res://Assets/Models/TieFighter/TieFighter_Image_3.jpg" id="4_tpqrc"]
 [ext_resource type="PackedScene" uid="uid://iws2vud6j45k" path="res://Scenes/LifeTimer/LifeTimer.tscn" id="5_78yh6"]
@@ -9,6 +11,9 @@
 [ext_resource type="AudioStream" uid="uid://byn8gkcnre2bp" path="res://Assets/Audio/Effects/658839_TieBlast.wav" id="6_jo6g7"]
 [ext_resource type="AudioStream" uid="uid://2hlcjcamn8v4" path="res://Assets/Audio/Effects/703913_flyby.wav" id="6_jv6vg"]
 [ext_resource type="PackedScene" uid="uid://dbx4srq242e5i" path="res://Scenes/PlayerRef/PlayerRef.tscn" id="6_tpqrc"]
+[ext_resource type="PackedScene" uid="uid://bsogooq3hohbv" path="res://Scenes/HitBox/HitBox.tscn" id="12_ul70j"]
+[ext_resource type="PackedScene" uid="uid://de002cry73r7b" path="res://Scenes/Vfx/TieExplosionEffect/TieExplosionEffect.tscn" id="13_kbofb"]
+[ext_resource type="PackedScene" uid="uid://bdym6n7ku6jua" path="res://Scenes/EnemyExplode/TieExplode.tscn" id="14_72i2r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_815ps"]
 resource_name = "Material.001"
@@ -116,7 +121,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_k0qry")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ul70j"]
+size = Vector3(4, 5, 4)
+
 [node name="TieFighter" type="Node3D"]
+script = ExtResource("1_jo6g7")
+enemy_bahaviour = ExtResource("2_ukorm")
 
 [node name="Pivot" type="Node3D" parent="."]
 
@@ -143,4 +153,13 @@ life_time = 20.0
 
 [node name="EngineSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("6_jv6vg")
+unit_size = 60.0
 area_mask = 513
+
+[node name="HitBox" parent="." instance=ExtResource("12_ul70j")]
+collision_layer = 2
+shape_resource = SubResource("BoxShape3D_ul70j")
+explosion_effect = ExtResource("13_kbofb")
+explosion_scene = ExtResource("14_72i2r")
+
+[connection signal="died" from="HitBox" to="." method="_on_hit_box_died"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://frnk4p3unksr"]
+[gd_scene load_steps=21 format=3 uid="uid://frnk4p3unksr"]
 
 [ext_resource type="Script" uid="uid://c2i8w8h1oaq1b" path="res://Scenes/World/World.gd" id="1_87yka"]
 [ext_resource type="Texture2D" uid="uid://bx1hrtr7l3g5p" path="res://Assets/Images/HDR_galactic_plane_hazy_nebulae.hdr" id="1_xf6vi"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dnadhe3vdh8gj" path="res://Scenes/PlayerCam/Camera3d.tscn" id="9_p7pgw"]
 [ext_resource type="PackedScene" uid="uid://cqfsxebotraic" path="res://Scenes/TieFighter/TieFighter.tscn" id="10_kuxid"]
 [ext_resource type="PackedScene" uid="uid://2gv3qb8l4xt0" path="res://Scenes/GameUi/GameUi.tscn" id="11_0d0er"]
+[ext_resource type="Resource" uid="uid://bd8umfkwqxerm" path="res://Resources/TurnShoot.tres" id="11_ng1ea"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_j0p05"]
 panorama = ExtResource("1_xf6vi")
@@ -116,6 +117,8 @@ shape = SubResource("BoxShape3D_ng1ea")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13907051, 0, -11.09429)
 
 [node name="TieFighter" parent="." instance=ExtResource("10_kuxid")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3596344, 0, -37.906258)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11380768, 0, -43.50685)
+stay_still = true
+enemy_bahaviour = ExtResource("11_ng1ea")
 
 [connection signal="timeout" from="TestTimer" to="." method="_on_test_timer_timeout"]
