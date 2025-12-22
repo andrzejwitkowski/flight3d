@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b5s5dito4uyp1" path="res://Scenes/Spawner/Spawner.tscn" id="8_kjd5s"]
 [ext_resource type="PackedScene" uid="uid://ddm7duwsc0shq" path="res://Scenes/Vfx/ShadedWall.tscn" id="8_p7pgw"]
 [ext_resource type="PackedScene" uid="uid://dnadhe3vdh8gj" path="res://Scenes/PlayerCam/Camera3d.tscn" id="9_p7pgw"]
-[ext_resource type="PackedScene" uid="uid://4il378veeq2p" path="res://Scenes/Laser/PlayerLaser.tscn" id="10_kuxid"]
+[ext_resource type="PackedScene" uid="uid://cqfsxebotraic" path="res://Scenes/TieFighter/TieFighter.tscn" id="10_kuxid"]
 [ext_resource type="PackedScene" uid="uid://2gv3qb8l4xt0" path="res://Scenes/GameUi/GameUi.tscn" id="11_0d0er"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_j0p05"]
@@ -62,11 +62,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -200)
 [node name="GameUi" parent="." instance=ExtResource("11_0d0er")]
 
 [node name="TestTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 
 [node name="Player" parent="." instance=ExtResource("7_87yka")]
 
 [node name="Walls" type="Node3D" parent="."]
+visible = false
 
 [node name="ShadedWall" parent="Walls" instance=ExtResource("8_p7pgw")]
 transform = Transform3D(-2.1855695e-07, 5, -2.1855695e-07, 0, -2.1855695e-07, -5, -5, -2.1855695e-07, 9.553427e-15, 0, 40, -12)
@@ -102,10 +103,6 @@ shape = SubResource("WorldBoundaryShape3D_ng1ea")
 
 [node name="Camera3D" parent="." instance=ExtResource("9_p7pgw")]
 
-[node name="PlayerLaser" parent="." instance=ExtResource("10_kuxid")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.040504336, 0, -4.2682514)
-speed = 20.0
-
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.625071)
 collision_layer = 2
@@ -114,5 +111,11 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.238, 2.81, -50)
 shape = SubResource("BoxShape3D_ng1ea")
+
+[node name="Start" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13907051, 0, -11.09429)
+
+[node name="TieFighter" parent="." instance=ExtResource("10_kuxid")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3596344, 0, -37.906258)
 
 [connection signal="timeout" from="TestTimer" to="." method="_on_test_timer_timeout"]
