@@ -4,8 +4,8 @@ extends EditorScript
 
 func _run():
 	
-	var editor_selection = EditorInterface.get_selection()
-	var selected_nodes = editor_selection.get_selected_nodes()
+	var editor_selection: EditorSelection = EditorInterface.get_selection()
+	var selected_nodes: Array[Node] = editor_selection.get_selected_nodes()
 
 	for node in selected_nodes:
 		if node is MeshInstance3D:
@@ -32,7 +32,7 @@ func _run():
 			collision_shape.owner = parent
 			
 			if mesh_instance.mesh:
-				var collision_shape_resource = mesh_instance.mesh.create_convex_shape()
+				var collision_shape_resource: ConvexPolygonShape3D = mesh_instance.mesh.create_convex_shape()
 				if collision_shape_resource:
 					collision_shape.shape = collision_shape_resource
 					collision_shape.transform = mesh_instance.transform

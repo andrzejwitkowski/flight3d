@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://de2684mamday8"]
+[gd_scene load_steps=11 format=4 uid="uid://de2684mamday8"]
 
 [ext_resource type="PackedScene" uid="uid://iws2vud6j45k" path="res://Scenes/LifeTimer/LifeTimer.tscn" id="1_i4hjy"]
 [ext_resource type="Script" uid="uid://c6j08raguoymt" path="res://Scenes/Asteroid/Asteroid.gd" id="1_ixrp8"]
 [ext_resource type="PackedScene" uid="uid://bsogooq3hohbv" path="res://Scenes/HitBox/HitBox.tscn" id="2_ixrp8"]
 [ext_resource type="Material" uid="uid://dt0mfpm75id3j" path="res://Resources/AsteroidMaterial.tres" id="3_60yow"]
 [ext_resource type="PackedScene" uid="uid://uv30rnn6xh7b" path="res://Scenes/EnemyExplode/AsteroidExplode.tscn" id="5_bkogq"]
+[ext_resource type="PackedScene" uid="uid://cvuc3eaewi4c" path="res://Scenes/Vfx/AsteroidExplosion/AsteroidExplosion.tscn" id="5_w0t7l"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_deuw0"]
 
@@ -55,6 +56,7 @@ skeleton = NodePath("")
 [node name="HitBox" parent="." instance=ExtResource("2_ixrp8")]
 collision_layer = 2
 shape_resource = SubResource("SphereShape3D_i4hjy")
+explosion_effect = ExtResource("5_w0t7l")
 explosion_scene = ExtResource("5_bkogq")
 
 [connection signal="died" from="HitBox" to="." method="_on_hit_box_died"]
