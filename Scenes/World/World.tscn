@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://frnk4p3unksr"]
+[gd_scene load_steps=18 format=3 uid="uid://frnk4p3unksr"]
 
 [ext_resource type="Script" uid="uid://c2i8w8h1oaq1b" path="res://Scenes/World/World.gd" id="1_87yka"]
 [ext_resource type="Texture2D" uid="uid://bx1hrtr7l3g5p" path="res://Assets/Images/HDR_galactic_plane_hazy_nebulae.hdr" id="1_xf6vi"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://b5s5dito4uyp1" path="res://Scenes/Spawner/Spawner.tscn" id="8_kjd5s"]
 [ext_resource type="PackedScene" uid="uid://ddm7duwsc0shq" path="res://Scenes/Vfx/ShadedWall.tscn" id="8_p7pgw"]
 [ext_resource type="PackedScene" uid="uid://dnadhe3vdh8gj" path="res://Scenes/PlayerCam/Camera3d.tscn" id="9_p7pgw"]
-[ext_resource type="PackedScene" uid="uid://de2684mamday8" path="res://Scenes/Asteroid/Asteroid.tscn" id="10_kuxid"]
 [ext_resource type="PackedScene" uid="uid://2gv3qb8l4xt0" path="res://Scenes/GameUi/GameUi.tscn" id="11_0d0er"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_j0p05"]
@@ -64,7 +63,6 @@ wait_time = 2.0
 [node name="Player" parent="." instance=ExtResource("7_87yka")]
 
 [node name="Walls" type="Node3D" parent="."]
-visible = false
 
 [node name="ShadedWall" parent="Walls" instance=ExtResource("8_p7pgw")]
 transform = Transform3D(-2.1855695e-07, 5, -2.1855695e-07, 0, -2.1855695e-07, -5, -5, -2.1855695e-07, 9.553427e-15, 0, 40, -12)
@@ -107,8 +105,5 @@ collision_mask = 0
 
 [node name="Start" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13907051, 0, -11.09429)
-
-[node name="Asteroid" parent="." instance=ExtResource("10_kuxid")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.420891, 0, -174.36986)
 
 [connection signal="timeout" from="TestTimer" to="." method="_on_test_timer_timeout"]

@@ -3,5 +3,6 @@
 [ext_resource type="Script" uid="uid://ck7nlh2dg7po3" path="res://Scenes/TieFighter/Behaviours/LossOfControl.gd" id="1_q6tht"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_q6tht")
 metadata/_custom_type_script = "uid://ck7nlh2dg7po3"

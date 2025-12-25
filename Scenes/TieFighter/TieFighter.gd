@@ -11,14 +11,27 @@ class_name TieFighter
 @onready var player_ref: LinkPlayer = $PlayerRef
 @onready var gun: Gun = $Pivot/Gun
 
+const TIE_JUST_FLY = preload("res://Resources/TieJustFly.tres")
+const LOSS_OF_CONTROL = preload("res://Resources/LossOfControl.tres")
+const TURN_SHOOT = preload("res://Resources/TurnShoot.tres")
+
+func choose_random_bahaviour() -> void:
+	var r: float = randf()
+	if r < 0.2:
+		enemy_bahaviour = LOSS_OF_CONTROL.duplicate(true)
+	elif r < 0.6:
+		enemy_bahaviour = TURN_SHOOT.duplicate(true)
+	else:
+		enemy_bahaviour = TIE_JUST_FLY.duplicate(true)
+	enemy_bahaviour.setup(self)
+
 func _ready() -> void:
-	if enemy_bahaviour:
-		enemy_bahaviour.setup(self)
+	choose_random_bahaviour()
 	face_player()
 
 func _physics_process(delta: float) -> void:
 	if !stay_still and enemy_bahaviour:
-			enemy_bahaviour.update(delta)
+		enemy_bahaviour.update(delta)
 
 func face_player() -> void:
 	if player_ref.player_z > global_position.z:

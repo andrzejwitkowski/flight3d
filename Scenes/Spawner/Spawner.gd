@@ -11,6 +11,8 @@ class_name Spawner
 const IMPACT_FLASH = preload("uid://djbfi8fbov5j")
 const PLAYER_LASER = preload("uid://4il378veeq2p")
 const TIE_LASER = preload("res://Scenes/Laser/TieLaser.tscn")
+const ASTEROID = preload("res://Scenes/Asteroid/Asteroid.tscn")
+const TIE_FIGHTER = preload("res://Scenes/TieFighter/TieFighter.tscn")
 
 enum SceneNames { ImpactFlash }
 enum LaserType { PlayerLaser, TieLaser }
@@ -62,10 +64,29 @@ func on_create_laser(p_tr: Transform3D, laser_type: Spawner.LaserType) -> void:
 			_playerLaserPool.active_next_scene(p_tr)
 		LaserType.TieLaser:
 			_tieLaserPool.active_next_scene(p_tr)
+			
+
+func spawn_enemies(scene: PackedScene, 
+				wait_time: float,  
+				spawn_range_x: Vector2, 
+				spawn_range_y: Vector2, 
+				count_range: Vector2i, 
+				timer: Timer) -> void:
+	if !enabled: return
+	
+	var rand_x: float = randf_range(spawn_range_x.x, spawn_range_x.y)
+	var rand_y: float = randf_range(spawn_range_y.x, spawn_range_y.y)
+	var np: Vector3 = Vector3(rand_x, rand_y, global_position.z)
+	
+	for i in randi_range(count_range.x, count_range.y):
+		var enemy: Node3D = scene.instantiate()
+		call_deferred("add_with_position", enemy, np)
+		await get_tree().create_timer(wait_time, false).timeout
+		
+	timer.start()
 
 func _on_tie_timer_timeout() -> void:
-	pass
-
+	spawn_enemies(TIE_FIGHTER, 2.5, x_range, y_range, Vector2i(1,3), tie_timer)
 
 func _on_asteroid_timer_timeout() -> void:
-	pass
+	spawn_enemies(ASTEROID, 2.5, x_range, y_range, Vector2i(1,3), asteroid_timer)

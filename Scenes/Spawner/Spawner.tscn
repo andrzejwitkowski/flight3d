@@ -6,12 +6,12 @@
 script = ExtResource("1_sop60")
 
 [node name="TieTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
 autostart = true
 
 [node name="AsteroidTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 3.0
 one_shot = true
 autostart = true
 
