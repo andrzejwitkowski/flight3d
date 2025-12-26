@@ -11,6 +11,9 @@ class_name TieFighter
 @onready var player_ref: LinkPlayer = $PlayerRef
 @onready var gun: Gun = $Pivot/Gun
 
+static var ships_spawned: int = 0
+static var ships_killed: int = 0
+
 const TIE_JUST_FLY = preload("res://Resources/TieJustFly.tres")
 const LOSS_OF_CONTROL = preload("res://Resources/LossOfControl.tres")
 const TURN_SHOOT = preload("res://Resources/TurnShoot.tres")
@@ -26,6 +29,7 @@ func choose_random_bahaviour() -> void:
 	enemy_bahaviour.setup(self)
 
 func _ready() -> void:
+	ships_spawned += 1
 	choose_random_bahaviour()
 	face_player()
 
@@ -51,4 +55,5 @@ func shoot_burst():
 
 
 func _on_hit_box_died() -> void:
+	ships_killed += 1
 	queue_free()

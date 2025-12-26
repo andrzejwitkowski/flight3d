@@ -5,12 +5,18 @@ class_name Asteroid
 const EXPLODE_Z: float = -40.0
 @onready var hit_box: HitBox = $HitBox
 
+static var asteroids_spawned: int = 0
+static var asteroids_killed: int = 0
+
 @export var speed: float = -15.0
 @export var spin_speed: float = 5.0
 @onready var icosphere: MeshInstance3D = $Icosphere
 
 var _rotate_x = randf()
 var _rotate_y = randf()
+
+func _ready() -> void:
+	asteroids_spawned += 1
 
 func _physics_process(delta: float) -> void:
 	explode_if_to_close()
@@ -27,4 +33,5 @@ func move_and_spin(delta: float):
 	icosphere.rotate_x(spin_speed * delta * _rotate_x)
 
 func _on_hit_box_died() -> void:
+	asteroids_killed += 1
 	queue_free()

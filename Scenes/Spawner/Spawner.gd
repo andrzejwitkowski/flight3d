@@ -73,12 +73,13 @@ func spawn_enemies(scene: PackedScene,
 				count_range: Vector2i, 
 				timer: Timer) -> void:
 	if !enabled: return
-	
-	var rand_x: float = randf_range(spawn_range_x.x, spawn_range_x.y)
-	var rand_y: float = randf_range(spawn_range_y.x, spawn_range_y.y)
-	var np: Vector3 = Vector3(rand_x, rand_y, global_position.z)
-	
+
 	for i in randi_range(count_range.x, count_range.y):
+		
+		var rand_x: float = randf_range(spawn_range_x.x, spawn_range_x.y)
+		var rand_y: float = randf_range(spawn_range_y.x, spawn_range_y.y)
+		var np: Vector3 = Vector3(rand_x, rand_y, global_position.z)
+		
 		var enemy: Node3D = scene.instantiate()
 		call_deferred("add_with_position", enemy, np)
 		await get_tree().create_timer(wait_time, false).timeout

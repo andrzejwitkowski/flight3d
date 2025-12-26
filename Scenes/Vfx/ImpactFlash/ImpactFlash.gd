@@ -1,5 +1,7 @@
 extends GPUParticles3D
 
+class_name ImpactFlash
+
 @export var one_off: bool = true
 
 @onready var impact_sound: AudioStreamPlayer3D = $ImpactSound

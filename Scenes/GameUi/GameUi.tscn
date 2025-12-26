@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://2gv3qb8l4xt0"]
+[gd_scene load_steps=6 format=3 uid="uid://2gv3qb8l4xt0"]
 
 [ext_resource type="Script" uid="uid://cagtqt5rbvcr5" path="res://Scenes/GameUi/GameUi.gd" id="1_mb7aw"]
 [ext_resource type="LabelSettings" uid="uid://rxh1b0yjcvqa" path="res://Resources/TitleLabel.tres" id="2_anb74"]
+[ext_resource type="PackedScene" uid="uid://c71lo606khnqb" path="res://Scenes/PauseMenuStat/PauseMenuStat.tscn" id="4_5hvfd"]
 [ext_resource type="LabelSettings" uid="uid://cg7qig2uq4s3y" path="res://Resources/NormalLabel.tres" id="4_tt7lr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_anolp"]
+content_margin_left = 48.0
+content_margin_top = 48.0
+content_margin_right = 48.0
+content_margin_bottom = 48.0
+bg_color = Color(0.21176471, 0.21176471, 0.21176471, 0.4117647)
 
 [node name="GameUi" type="Control"]
 process_mode = 3
@@ -31,7 +39,6 @@ theme_override_font_sizes/font_size = 24
 text = "000000"
 
 [node name="GameOver" type="ColorRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,8 +80,57 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
 [node name="PressShoot" type="Label" parent="GameOver/VB"]
+visible = false
 layout_mode = 2
 text = "Press Shoot"
 label_settings = ExtResource("4_tt7lr")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PauseMenu" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(800, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -200.0
+offset_right = 400.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_anolp")
+
+[node name="VB" type="VBoxContainer" parent="PauseMenu"]
+layout_mode = 2
+theme_override_constants/separation = 48
+
+[node name="Label" type="Label" parent="PauseMenu/VB"]
+layout_mode = 2
+text = "PAUSED"
+label_settings = ExtResource("2_anb74")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBStats" type="VBoxContainer" parent="PauseMenu/VB"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="AsteroidStat" parent="PauseMenu/VB/VBStats" instance=ExtResource("4_5hvfd")]
+layout_mode = 2
+title = "Asteroids"
+
+[node name="ShipsStat" parent="PauseMenu/VB/VBStats" instance=ExtResource("4_5hvfd")]
+layout_mode = 2
+title = "Ships"
+
+[node name="PowerUpsStats" parent="PauseMenu/VB/VBStats" instance=ExtResource("4_5hvfd")]
+layout_mode = 2
+title = "Powerups"
+
+[node name="GameTimeStat" parent="PauseMenu/VB/VBStats" instance=ExtResource("4_5hvfd")]
+layout_mode = 2
+title = "Game time"
