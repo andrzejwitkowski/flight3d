@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b5s5dito4uyp1" path="res://Scenes/Spawner/Spawner.tscn" id="8_kjd5s"]
 [ext_resource type="PackedScene" uid="uid://ddm7duwsc0shq" path="res://Scenes/Vfx/ShadedWall.tscn" id="8_p7pgw"]
 [ext_resource type="PackedScene" uid="uid://dnadhe3vdh8gj" path="res://Scenes/PlayerCam/Camera3d.tscn" id="9_p7pgw"]
-[ext_resource type="PackedScene" uid="uid://2gv3qb8l4xt0" path="res://Scenes/GameUi/GameUi.tscn" id="11_0d0er"]
+[ext_resource type="PackedScene" uid="uid://2gv3qb8l4xt0" path="res://Scenes/PowerUp/GameUi.tscn" id="11_0d0er"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_j0p05"]
 panorama = ExtResource("1_xf6vi")

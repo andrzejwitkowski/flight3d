@@ -19,14 +19,27 @@ var _is_paused: bool = false
 
 func _enter_tree() -> void:
 	SignalHub.on_game_over.connect(on_game_over)
+	SignalHub.on_score_changed.connect(on_score_changed)
+	
+func on_score_changed() -> void:
+	score_label.text = "%6d" % score
+	
+static var score: int = 0: 
+	set(v):
+		score = v
+		score = max(v, 0)
+		SignalHub.emit_score_changed()
 	
 func on_game_over() -> void:
+	game_over_scored.text = "You scored %d points!" % score
 	game_over.show()
 	get_tree().paused = true
 	await get_tree().create_timer(2.0).timeout
 	press_shoot.show()	
+	
 
 func _ready() -> void:
+	score = 0
 	Asteroid.asteroids_killed = 0.0
 	Asteroid.asteroids_spawned = 0.0
 	TieFighter.ships_killed = 0.0

@@ -161,5 +161,6 @@ collision_layer = 2
 shape_resource = SubResource("BoxShape3D_ul70j")
 explosion_effect = ExtResource("13_kbofb")
 explosion_scene = ExtResource("14_72i2r")
+create_power_up = true
 
 [connection signal="died" from="HitBox" to="." method="_on_hit_box_died"]

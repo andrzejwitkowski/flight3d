@@ -8,6 +8,7 @@ class_name Player
 @onready var gun: Gun = $Pivot/Gun
 @onready var impact_flash: ImpactFlash = $ImpactFlash
 @onready var health_bar: HealthBar = $UI/HealthBar
+@onready var shield: Shield = $Shield
 
 const GROUP_PLAYER: String = "player"
 
@@ -19,6 +20,9 @@ static var game_time: float = 0.0
 @export var max_tilt_angle: float = 20.0
 @export var max_roll_angle: float = 30.0
 @export var debris_damage: float = 5.0
+@export var health_bonus: int = 20
+
+
 
 func _enter_tree() -> void:
 	game_time = 0.0
@@ -54,10 +58,17 @@ func update_ship_rotation(roll_input: float, pitch_input: float, delta: float) -
 func _on_hit_area_area_entered(area: Area3D) -> void:
 	if area is Laser:
 		health_bar.take_damage(area.get_damage())
+		SignalHub.emit_player_hit()
 	elif area is HitBox:
 		debris_hit()
+	elif area is PowerUp:
+		match area.powerup_type:
+			PowerUp.PowerUpType.Health:
+				health_bar.incr_value(health_bonus)
+			PowerUp.PowerUpType.Shield:
+				shield.enable_shield()
 
-func _on_hit_area_body_entered(body: Node3D) -> void:
+func _on_hit_area_body_entered(_body: Node3D) -> void:
 	debris_hit()
 	
 func debris_hit():

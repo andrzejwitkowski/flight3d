@@ -5,6 +5,19 @@ signal on_crate_one_off(p_pos: Vector3, scene_name: Spawner.SceneNames)
 signal on_create_laser(p_tr: Transform3D, laser_type: Spawner.LaserType)
 signal on_create_packed_scene(p_tr: Transform3D, ps: PackedScene)
 signal on_game_over
+signal on_create_power_up(p_pos: Vector3)
+signal on_player_hit
+signal on_score_changed
+
+
+func emit_score_changed() -> void:
+	on_score_changed.emit()
+
+func emit_player_hit() -> void:
+	on_player_hit.emit()
+
+func emit_create_power_up(p_pos: Vector3) -> void:
+	on_create_power_up.emit(p_pos)
 
 func emit_game_over() -> void:
 	on_game_over.emit()

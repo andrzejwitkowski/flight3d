@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://bd1fc3vi64jb1"]
+
+[ext_resource type="Script" uid="uid://b11aqe7qs7lc3" path="res://Scenes/Shield/Shield.gd" id="1_nlrep"]
+[ext_resource type="Shader" uid="uid://ddy83ovk0mi5j" path="res://Scenes/Shield/Shield.tres" id="1_sngbc"]
+[ext_resource type="Texture2D" uid="uid://dbmy5qxh2yupa" path="res://Assets/Particles/Lightning.png" id="2_djkv3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_djkv3"]
+render_priority = 0
+shader = ExtResource("1_sngbc")
+shader_parameter/ShieldColor = Color(0.52037823, 2.0375323, 2.3350136, 1)
+shader_parameter/Speed = 0.5
+shader_parameter/ShieldTexture = ExtResource("2_djkv3")
+
+[sub_resource type="SphereMesh" id="SphereMesh_kp645"]
+material = SubResource("ShaderMaterial_djkv3")
+radius = 3.0
+height = 6.0
+radial_segments = 32
+rings = 64
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_djkv3"]
+radius = 4.0
+
+[node name="Shield" type="Area3D"]
+collision_layer = 128
+collision_mask = 18
+script = ExtResource("1_nlrep")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_kp645")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_djkv3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

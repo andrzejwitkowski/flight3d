@@ -12,8 +12,8 @@ const COLOR_GOOD: Color = Color("#33cc33")
 
 @export var level_low: int = 30
 @export var level_med: int = 65
-@export var start_health: int = 100
-@export var max_health: int = 100
+@export var start_health: int = 200
+@export var max_health: int = 200
 
 
 func _ready() -> void:

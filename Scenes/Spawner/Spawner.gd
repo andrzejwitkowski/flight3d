@@ -13,6 +13,7 @@ const PLAYER_LASER = preload("uid://4il378veeq2p")
 const TIE_LASER = preload("res://Scenes/Laser/TieLaser.tscn")
 const ASTEROID = preload("res://Scenes/Asteroid/Asteroid.tscn")
 const TIE_FIGHTER = preload("res://Scenes/TieFighter/TieFighter.tscn")
+const POWER_UP = preload("res://Scenes/PowerUp/PowerUp.tscn")
 
 enum SceneNames { ImpactFlash }
 enum LaserType { PlayerLaser, TieLaser }
@@ -38,6 +39,7 @@ func _ready() -> void:
 	SignalHub.on_crate_one_off.connect(on_crate_one_off)
 	SignalHub.on_create_laser.connect(on_create_laser)
 	SignalHub.on_create_packed_scene.connect(on_create_packed_scene)
+	SignalHub.on_create_power_up.connect(on_create_power_up)
 
 func add_with_transform(ob: Node3D, p_tr: Transform3D) -> void:
 	add_child(ob)
@@ -64,6 +66,10 @@ func on_create_laser(p_tr: Transform3D, laser_type: Spawner.LaserType) -> void:
 			_playerLaserPool.active_next_scene(p_tr)
 		LaserType.TieLaser:
 			_tieLaserPool.active_next_scene(p_tr)
+			
+func on_create_power_up(p_pos: Vector3) -> void:
+	var npu: PowerUp = POWER_UP.instantiate()
+	call_deferred("add_with_position", npu, p_pos)
 			
 
 func spawn_enemies(scene: PackedScene, 
